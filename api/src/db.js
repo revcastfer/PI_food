@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const axios = require("axios")
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
@@ -37,6 +38,20 @@ const { Diets } = sequelize.models;
 // Product.hasMany(Reviews);
 Recipe.belongsToMany(Diets,{through:"RecipeDiets"});
 Diets.belongsToMany(Recipe,{through:"RecipeDiets"});
+
+const carga=async()=>{
+  let data=await axios("https://api.spoonacular.com/recipes/complexSearch?apiKey=2a0865bcc2304931b42934bd7906de76&addRecipeInformation=true&number=100");
+  let dietasFiltradas=[];
+  data.data.results.map(ele=>{
+                        ele.diets.map(diet=>{
+                                          if(!dietasFiltradas.includes(diet)){dietasFiltradas.push(diet)}})
+                                              });
+  let dataForBulk=[];
+  dietasFiltradas.forEach(ele=>dataForBulk.push({nombre:ele}));
+Diets.bulkCreate(dataForBulk)
+};
+
+carga();
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
