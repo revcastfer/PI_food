@@ -1,10 +1,10 @@
 const {Router}= require("express");
-const dietHandler=require("../handlers/dietHandlers.js");
+const getDietsHandler=require("../handlers/dietHandlers.js");
 
 
 dietsRouter=Router();
 
 
-dietsRouter.get("/",dietHandler)
+dietsRouter.get("/",getDietsHandler)
 
 module.exports=dietsRouter

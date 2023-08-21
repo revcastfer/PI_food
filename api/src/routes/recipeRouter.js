@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const {diethandler}=require("../handlers/dietHandlers.js")
+const postRecipeHandler=require("../handlers/recipeHandlers.js")
 
 recipeRouter=Router();
 
-//recipeRouter.get("/",diethandler)
+recipeRouter.post("/",postRecipeHandler)
 
 module.exports=recipeRouter
