@@ -8,11 +8,12 @@ try {
 
 
 	dietas.forEach( async dieta=>{
-    let finder = await Diets.findOne({where:{name:dieta}});
-    await Recipe.addDiets(finder)
-})
-	console.log(dietas);
-	return recipe
+    	let finder = await Diets.findOne({where:{nombre:dieta}});
+    	await recipe.addDiets(finder)
+	});
+
+	let newRecipe=await Recipe.findOne({where:{name:recipe.name},include:Diets});
+	return  newRecipe
 }
 catch(err){throw new Error (err)}
 
