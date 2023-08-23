@@ -1,4 +1,4 @@
-const postRecipe = require("../controllers/recipeControllers.js")
+const {postRecipe,getRecipeById} = require("../controllers/recipeControllers.js")
 
 
 
@@ -13,5 +13,18 @@ const postRecipeHandler=async(req,res)=>{
 	catch(err){throw new Error(err.message)}
 }
 
+const getRecipeByIdHandler=async(req,res)=>{
+	const {id}=req.params;
+	try{
+		let response=await getRecipeById(id);
+		res.status(200).json(response)
+	}catch(err){res.status(500).json(err.message)}
 
-module.exports= postRecipeHandler
+
+	
+
+}
+
+
+
+module.exports= {postRecipeHandler,getRecipeByIdHandler}
