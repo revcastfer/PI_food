@@ -1,4 +1,4 @@
-const {postRecipe,getRecipeById} = require("../controllers/recipeControllers.js")
+const {postRecipe,getRecipeById,getRecipeByName} = require("../controllers/recipeControllers.js")
 
 
 
@@ -19,12 +19,19 @@ const getRecipeByIdHandler=async(req,res)=>{
 		let response=await getRecipeById(id);
 		res.status(200).json(response)
 	}catch(err){res.status(500).json(err.message)}
+}
 
+const getRecipeByNameHandler=async(req,res)=>{
 
+	try{
+		let resp=await getRecipeByName(req.query.name);
+		res.status(200).json(resp)
+	}
+	catch(err){throw new Error(err.message)}
 	
 
 }
 
 
 
-module.exports= {postRecipeHandler,getRecipeByIdHandler}
+module.exports= {postRecipeHandler,getRecipeByIdHandler,getRecipeByNameHandler}
