@@ -10,6 +10,7 @@ const Container=styled.div`
 export default function Cards(){
 	const data=useSelector(state=>state.data);
 	let [recipes,setRecipes]=useState([]);
+	
 
 	useEffect(()=>{
 		setRecipes(data)

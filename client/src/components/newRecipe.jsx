@@ -8,7 +8,7 @@ const Container=styled.div`
 export default function NewRecipe(){
 	return(
 		<Container>
-			<Navbar/>
+			new recipe
 			
 		</Container>
 		)

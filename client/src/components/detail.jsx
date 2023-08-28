@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Navbar from "./navbar.jsx";
+import { NavLink } from "react-router-dom"
 
 
 
@@ -11,6 +12,7 @@ export default function Detail(){
 		<Container>
 		
 			detail
+			<NavLink to="/home/cards">back to home</NavLink>
 		</Container>
 		)
 }
