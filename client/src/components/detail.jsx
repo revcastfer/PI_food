@@ -27,25 +27,27 @@ const RecipeTipe=styled.div`
 
 
 
+
 export default function Detail(){
 	const id=useParams().id;
 	const [recipe,setRecipe]=useState();
 		useEffect(()=>{
-		axios(`/recipe/${id}`)
-		.then(data=>data.data)
-		.then(data=>{setRecipe(data);console.log(data)});
-	},[recipe]);
+			axios(`/recipe/${id}`)
+			.then(data=>data.data)
+			.then(data=>{setRecipe(data);console.log(data)});
+		},[recipe,id]);
 	
 	return(
 		<Container>
 			<NavLink to="/home/cards">back to home</NavLink>
 			{recipe?<detailContainer><RecipeImg src={recipe.image?recipe.image:recipe.img} />
 			
-			<RecipeNombre></RecipeNombre>
-			<RecipeResumen></RecipeResumen>
-			<RecipeScore></RecipeScore>
-			<RecipeTipe></RecipeTipe>
-			<RecipeSteps></RecipeSteps></detailContainer>:<div>cargando...</div>}
+			<RecipeNombre>{recipe.title?recipe.title:recipe.name}</RecipeNombre>
+			<RecipeResumen>{recipe.summary?recipe.summary:recipe.resumenPlato}</RecipeResumen>
+			<RecipeScore>{recipe.healtScore?recipe.healtScore:recipe.score}</RecipeScore>
+			<RecipeTipe>{recipe.diets?recipe.diets.map(diet=><div>diet</div>):"falta"}</RecipeTipe>
+			<RecipeSteps>{recipe.analyzedInstructions?recipe.analyzedInstructions.map(step=><div>step</div>):"falta"}</RecipeSteps>
+			</detailContainer>:<div>cargando...</div>}
 				
 			
 
