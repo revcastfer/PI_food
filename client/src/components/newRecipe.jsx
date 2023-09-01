@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import {useState,useEffect} from "react"
 import axios from "axios"
+import OptionSelected from	"./optionSelected.jsx"
+import CheckComponent from "./checkComponent.jsx"
+import { useSelector } from 'react-redux'
 
 
 const Container=styled.div`
@@ -37,6 +40,8 @@ const RecipeTipe=styled.select`
 
 export default function NewRecipe(){
 	const [diets,setDiets]=useState();
+	const dietsSelected=useSelector(state=>state.dietsSelected);
+
 	useEffect(()=>{
 			axios(`/diets`)
 			.then(data=>data.data)
@@ -44,17 +49,16 @@ export default function NewRecipe(){
 		},[diets]);
 
 
-	return(
+	return( 
 		<Container>
 			<Option><RecipeNombre type="text" placeholder="nombre"/><ErrorData>no vacio,no numeros</ErrorData></Option>
 			<Option><RecipeImg type="url" placeholder="imagen url"/><ErrorData>no vacio</ErrorData></Option>
 			<Option><RecipeScore type="number" placeholder="healt Score"/><ErrorData>elegir puntuacion</ErrorData></Option>
 			<Option><RecipeResumen type="text" placeholder="resumen"/><ErrorData>no vacio</ErrorData></Option>
-			<Option><RecipeTipe>
-				<option value=""  readOnly hidden>seleccionar...</option>
-				{diets?diets.map(diet=><option value={diet}>{diet}</option>):null}
-			</RecipeTipe><ErrorData>seleccionar dietas</ErrorData></Option>
+			<Option><checkComponent options={diets} legend="seleccionar dieta" /><ErrorData>seleccionar dietas</ErrorData></Option>
+			<OptionSelected  options={dietsSelected}/>
 			<Option><RecipeSteps></RecipeSteps><ErrorData>ingresar pasos</ErrorData></Option>
+
 			
 		</Container>
 		)
