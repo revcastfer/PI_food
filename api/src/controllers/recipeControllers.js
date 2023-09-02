@@ -50,8 +50,7 @@ const getRecipeByName=async(name)=>{
 	let data=await axios("https://api.spoonacular.com/recipes/complexSearch?apiKey=2a0865bcc2304931b42934bd7906de76&addRecipeInformation=true&number=100");
 	let recetasApi=data.data.results;
 	let recetas=await Recipe.findAll();
-	console.log(recetasApi)
-	try{
+		try{
 		if(name){
 			let filterApi=recetasApi.filter(ele=>ele.title===name);
 			console.log(filterApi);

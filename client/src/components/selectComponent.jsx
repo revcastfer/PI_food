@@ -7,7 +7,9 @@ const Container=styled.select`
 export default function SelectComponent(props){
 	let diets=props.diets;
 	let dispatch=useDispatch();
-	let selectDiet=()=>{dispatch(dietsSelected(e.target.value))};
+	let selectDiet=(e)=>{
+		let diet=e.target.value;
+		if (!diets.includes(diet)){dispatch(dietsSelected([...diets,diet]))}};
 	return(<div>
 		<Container onChange={selectDiet}>	
 				<option value=""  readOnly hidden>seleccionar...</option>

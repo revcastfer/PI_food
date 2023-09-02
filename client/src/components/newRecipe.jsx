@@ -45,9 +45,9 @@ export default function NewRecipe(){
 	useEffect(()=>{
 			axios(`/diets`)
 			.then(data=>data.data)
-			.then(data=>{setDiets(data);console.log(diets)});
-		},[diets]);
-
+			.then(data=>{setDiets(data)});
+		},[dietsSelected]);
+console.log(diets)
 
 	return( 
 		<Container>
@@ -55,9 +55,9 @@ export default function NewRecipe(){
 			<Option><RecipeImg type="url" placeholder="imagen url"/><ErrorData>no vacio</ErrorData></Option>
 			<Option><RecipeScore type="number" placeholder="healt Score"/><ErrorData>elegir puntuacion</ErrorData></Option>
 			<Option><RecipeResumen type="text" placeholder="resumen"/><ErrorData>no vacio</ErrorData></Option>
-			<Option><checkComponent options={diets} legend="seleccionar dieta" /><ErrorData>seleccionar dietas</ErrorData></Option>
-			<OptionSelected  options={dietsSelected}/>
+			<Option><CheckComponent options={diets} legend="seleccionar dieta" /><ErrorData>seleccionar dieta(s)</ErrorData></Option>
 			<Option><RecipeSteps></RecipeSteps><ErrorData>ingresar pasos</ErrorData></Option>
+			<OptionSelected  options={dietsSelected}/>
 
 			
 		</Container>
