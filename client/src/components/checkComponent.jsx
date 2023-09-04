@@ -19,7 +19,7 @@ export default function CheckComponent(props){
   				{options?options.map(option=> 
   				<Option>
   					<input type="checkbox" id={option.nombre}  value={option.nombre} />
-    				<label for={option.nombre}>{option.nombre}</label>
+    				<label htmlFor={option.nombre}>{option.nombre}</label>
   				</Option>
   			  	):null}
    			</fieldset>
