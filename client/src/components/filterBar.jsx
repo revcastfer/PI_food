@@ -28,9 +28,11 @@ export default function FilterBar(){
 	
 
 	useEffect(()=>{
-			if(!diets){axios(`/diets`)
-			.then(data=>data.data)
-			.then(data=>{setDiets(data)});}
+			if(!diets){
+				axios(`/diets`)
+				.then(data=>data.data)
+				.then(data=>{setDiets(data)});
+			}
 	},[diets]);
 
 const handleChange=(e)=>{

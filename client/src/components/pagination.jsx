@@ -17,7 +17,7 @@ export default function Pagination(props){
 
 	let pageCount= Math.ceil(nroDatos / perPage);
 	let indicador=[];
- 	for (let i=0;i>pageCount;i++){
+ 	for (let i=0;i>nroDatos;i++){
  		indicador.push(i)
  	}
  	let pagesVisited=pageNumber*perPage;

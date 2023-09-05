@@ -13,7 +13,10 @@ const Container=styled.div`
 export default function Home(){
 	const dispatch=useDispatch();
 
-	
+	axios("/recipe")
+		.then(data=>data.data)
+		.then(data=>dispatch(loguin(data)))
+		.then(data=>dispatch(setDataFilter(data)));
 	return(
 		<Container>
 			<Navbar/>			
