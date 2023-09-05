@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Navbar from "./navbar.jsx";
 import axios from "axios"
 import { NavLink,useParams } from "react-router-dom";
 import {useState,useEffect} from "react"

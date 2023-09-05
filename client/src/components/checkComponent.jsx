@@ -9,9 +9,8 @@ display:flex;
  `;
 
 export default function CheckComponent(props){
-	let legend=props.legend;
 	let options=props.options;
-	console.log(props)
+
 	return(
 		<Container>
 			<fieldset>

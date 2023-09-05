@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {useState,useEffect} from "react"
+import {useState} from "react"
 
 const Container=styled.div`
 display:flex;
@@ -16,17 +16,17 @@ export default function InputsGenerate(){
 	const [numberOfSteps,setNumberOfSteps]=useState(1);
 
 	const handleWrite=()=>{
+		console.log("entra");
 		if(document.getElementById(numberOfSteps).value.length>0){
 		if(!document.getElementById(numberOfSteps+1)){
 			cretateStep();
-			document.getElementById(numberOfSteps+1).addEventListener.onchange=function(){handleWrite};
-
+			
 		}
 	};
 }
 	const cretateStep=()=>{
-		
-		let contenedor=document.getElementById("container");
+	
+	let contenedor=document.getElementById("container");
 	let temporalDiv=document.createElement("div");	
 	let temporalText=document.createElement("textarea");
 	temporalText.setAttribute("id", numberOfSteps+1);
@@ -36,8 +36,9 @@ export default function InputsGenerate(){
 	temporalDiv.appendChild(temporalText)
 	contenedor.appendChild(temporalDiv);
 	setNumberOfSteps(numberOfSteps+1);
-	;
-
+	console.log(document.getElementById(numberOfSteps+1));
+	document.getElementById(numberOfSteps+1).addEventListener("Change",handleWrite);
+		
 	}
 
 
@@ -45,7 +46,10 @@ export default function InputsGenerate(){
 
 	return(
 <Container id="container">
-	<div ><textarea id={1} onChange={handleWrite} cols="70" rows="3" type="text" placeholder="ingrese paso"/> </div>
+	<div >
+		<textarea id={1} onChange={handleWrite} cols="70" rows="3" type="text" placeholder="ingrese paso"/> 
+
+	</div>
 
 </Container>
 

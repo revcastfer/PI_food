@@ -3,7 +3,6 @@ import {useState,useEffect} from "react"
 import axios from "axios"
 import CheckComponent from "./checkComponent.jsx"
 import InputsGenerate from "./inputsGenerate.jsx"
-import { useSelector } from 'react-redux'
 
 
 const Container=styled.div`
@@ -42,18 +41,20 @@ width:48vw;
 `;
 const RecipeImg=styled.input`
 `;
-const RecipeTipe=styled.select`
-`;
+
 
 export default function NewRecipe(){
 	const [diets,setDiets]=useState();
 	
 
 	useEffect(()=>{
+		if(diets.length===0){
 			axios(`/diets`)
 			.then(data=>data.data)
 			.then(data=>{setDiets(data)});
-		},[]);
+		}
+			
+		},[diets]);
 
 
 	return( 
@@ -62,7 +63,7 @@ export default function NewRecipe(){
 			<Option><RecipeImg type="url" placeholder="imagen url"/><ErrorData>no vacio</ErrorData></Option>
 			<Option><RecipeScore type="number" placeholder="healt Score"/><ErrorData>elegir puntuacion</ErrorData></Option>
 			<Option><RecipeResumen rows="5" cols="43" placeholder="resumen"/><ErrorData>no vacio</ErrorData></Option>
-			<Option><CheckComponent options={diets} legend="seleccionar dieta" /><ErrorData>seleccionar dieta(s)</ErrorData></Option>
+			{diets?<Option><CheckComponent options={diets} legend="seleccionar dieta" /><ErrorData>seleccionar dieta(s)</ErrorData></Option>:null}
 			<RecipeSteps>
 			 <ErrorData>ingresar pasos</ErrorData>
 			 <InputsGenerate/>
