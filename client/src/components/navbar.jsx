@@ -10,7 +10,14 @@ display:flex;
 justify-content:space-evenly;
 `;
 
-
+const otionsLinksNavbar=({isActive})=>{
+	return {
+		fontSize:"35px",
+		color: isActive ? 'orange':'white',
+		fontWeight: isActive? "bold" : 'normal',
+		textDecoration:  "none",
+	}
+}
 
 
 export default function Navbar(){
@@ -23,8 +30,8 @@ export default function Navbar(){
 	return(
 		<Container>
 			 <OptionsDiv>			
-		    	<NavLink  to="/home/cards">home</NavLink>
-		    	<NavLink to="/home/new">new recipe</NavLink>
+		    	<NavLink style={otionsLinksNavbar} to="/home/cards">home</NavLink>
+		    	<NavLink style={otionsLinksNavbar} to="/home/new">new recipe</NavLink>
 			</OptionsDiv>
 		
 		</Container>

@@ -8,8 +8,7 @@ import InputsGenerate from "./inputsGenerate.jsx"
 const Container=styled.div`
 display:flex;
 flex-direction:column;
-position:relative;
-justify-content:center;
+justify-content: center;
 width:100vw;
 border:1px solid green
 `;
@@ -34,10 +33,7 @@ const RecipeScore=styled.input`
 const RecipeSteps=styled.div`
 border: 1px solid red;
 display:flex;
-position:absolute;
-right:0px;
-top:0px;
-width:48vw;
+
 `;
 const RecipeImg=styled.input`
 `;
@@ -48,7 +44,7 @@ export default function NewRecipe(){
 	
 
 	useEffect(()=>{
-		if(diets.length===0){
+		if(!diets){
 			axios(`/diets`)
 			.then(data=>data.data)
 			.then(data=>{setDiets(data)});
@@ -64,10 +60,11 @@ export default function NewRecipe(){
 			<Option><RecipeScore type="number" placeholder="healt Score"/><ErrorData>elegir puntuacion</ErrorData></Option>
 			<Option><RecipeResumen rows="5" cols="43" placeholder="resumen"/><ErrorData>no vacio</ErrorData></Option>
 			{diets?<Option><CheckComponent options={diets} legend="seleccionar dieta" /><ErrorData>seleccionar dieta(s)</ErrorData></Option>:null}
-			<RecipeSteps>
-			 <ErrorData>ingresar pasos</ErrorData>
-			 <InputsGenerate/>
-			</RecipeSteps>
+			<Option><RecipeSteps>			 
+			 	<InputsGenerate/>
+			 		<ErrorData>ingresar pasos</ErrorData>
+				</RecipeSteps>
+			</Option>
 
 	
 
