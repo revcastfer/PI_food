@@ -29,7 +29,7 @@ export default function InputsGenerate(){
 		let contenedor=document.getElementById("container");	
 		let temporalText=document.createElement("textarea");
 		temporalText.setAttribute("id", numberOfSteps+1);
-		temporalText.setAttribute("cols", "70");
+		temporalText.setAttribute("cols", "50");
 		temporalText.setAttribute("rows", "3");
 		temporalText.setAttribute("type", "text");
 		temporalText.setAttribute("placeholder", `ingrese paso N°${numberOfSteps+1}`);	
@@ -46,7 +46,7 @@ export default function InputsGenerate(){
 	return(
 <Container id="container" onChange={handleWrite}>
 	
-		<textarea id={1}  cols="70" rows="3" type="text" placeholder="ingrese paso"/> 
+		<textarea id={1}  cols="50" rows="3" type="text" placeholder="ingrese paso"/> 
 
 
 </Container>

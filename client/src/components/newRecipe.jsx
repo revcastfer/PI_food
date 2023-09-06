@@ -10,19 +10,19 @@ display:flex;
 flex-direction:column;
 justify-content: center;
 width:100vw;
-border:1px solid green
+
 `;
 
 const ErrorData=styled.div`
 display:inline;
-color:red;
-font-size:12px
+color:yellow;
+font-size:20px
 `;
 const Option=styled.div`
-border: 1px solid red;
 display:flex;
-width:50vw;
-justify-content: space-between
+width:40vw;
+justify-content: space-between;
+margin:15px
  `;
 const RecipeNombre=styled.input`
 `;
@@ -31,7 +31,7 @@ const RecipeResumen=styled.textarea`
 const RecipeScore=styled.input`
 `;
 const RecipeSteps=styled.div`
-border: 1px solid red;
+
 display:flex;
 
 `;
@@ -40,29 +40,52 @@ const RecipeImg=styled.input`
 
 
 export default function NewRecipe(){
-	const [diets,setDiets]=useState();
-	
+	const [diets,setDiets]=useState();	
 
 	useEffect(()=>{
 		if(!diets){
 			axios(`/diets`)
 			.then(data=>data.data)
 			.then(data=>{setDiets(data)});
-		}
-			
-		},[diets]);
+		}			
+	},[diets]);
+
+	const changeError=(id,valor)=>{
+		document.getElementById(id).style.visibility=valor;
+	}
+
+	const validacion=(e)=>{
+		let id=e.target.id;
+		
+	}
 
 
 	return( 
 		<Container>
-			<Option><RecipeNombre type="text" placeholder="nombre"/><ErrorData>no vacio,no numeros</ErrorData></Option>
-			<Option><RecipeImg type="url" placeholder="imagen url"/><ErrorData>no vacio</ErrorData></Option>
-			<Option><RecipeScore type="number" placeholder="healt Score"/><ErrorData>elegir puntuacion</ErrorData></Option>
-			<Option><RecipeResumen rows="5" cols="43" placeholder="resumen"/><ErrorData>no vacio</ErrorData></Option>
-			{diets?<Option><CheckComponent options={diets} legend="seleccionar dieta" /><ErrorData>seleccionar dieta(s)</ErrorData></Option>:null}
-			<Option><RecipeSteps>			 
-			 	<InputsGenerate/>
-			 		<ErrorData>ingresar pasos</ErrorData>
+			<Option>
+				<RecipeNombre id="nombre" type="text" placeholder="nombre"/>
+				<ErrorData id="errornombre"><b>no vacio,no numeros</b></ErrorData>
+			</Option>
+			<Option>
+				<RecipeImg id="imagen" type="url" placeholder="imagen url"/>
+				<ErrorData id="errorimagen"><b>no vacio</b></ErrorData>
+			</Option>
+			<Option>
+				<RecipeScore id="healthScore" type="number" placeholder="healt Score"/>
+				<ErrorData id="errorhealthScore"><b>elegir puntuacion</b></ErrorData>
+			</Option>
+			<Option>
+				<RecipeResumen id="resumen" rows="5" cols="43" placeholder="resumen"/>
+				<ErrorData id="errorresumen"><b>no vacio</b></ErrorData>
+			</Option>
+			{diets?<Option>
+						<CheckComponent id="dietas" options={diets} legend="seleccionar dieta" />
+						<ErrorData id="errordietas"><b>seleccionar dieta(s)</b></ErrorData>
+					</Option>:null}
+			<Option>
+				<RecipeSteps >			 
+			 		<InputsGenerate id="pasos" />
+			 		<ErrorData id="errorpasos"><b>ingresar pasos</b></ErrorData>
 				</RecipeSteps>
 			</Option>
 
