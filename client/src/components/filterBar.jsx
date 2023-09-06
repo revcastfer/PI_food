@@ -32,6 +32,7 @@ export default function FilterBar(){
 				axios(`/diets`)
 				.then(data=>data.data)
 				.then(data=>{setDiets(data)});
+				console.log(diets)
 			}
 	},[diets]);
 
@@ -73,17 +74,20 @@ const handleChange=(e)=>{
 				</OptionSelect>
 				<OptionSelect id="origen" onChange={handleChange}>
 					<option value=""  readOnly hidden>seleccionar...</option>
-					<option value="API">API</option><option value="FORM">FORM</option>
+					<option value="API">API</option>
+					<option value="FORM">FORM</option>
 				</OptionSelect>
 			healthScore:
 				<OptionSelect id="healthScore" onChange={handleChange}>
 					<option  value=""  readOnly hidden>seleccionar...</option>
-					<option value="+">mayor a menor</option><option value="-">menor a mayor</option>
+					<option value="+">mayor a menor</option>
+					<option value="-">menor a mayor</option>
 				</OptionSelect>	
 			orden :
 				<OptionSelect id="orden" onChange={handleChange}>
 					<option value=""  readOnly hidden>seleccionar...</option>
-					<option value="A">A to Z</option><option value="Z">Z to A</option>
+					<option value="A">A to Z</option>
+					<option value="Z">Z to A</option>
 				</OptionSelect>
 				<SearchBar/>			
 			</Filtros>

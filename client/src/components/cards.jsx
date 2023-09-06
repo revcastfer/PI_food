@@ -40,8 +40,10 @@ export default function Cards(){
 					</Container>
 			:<Container>cargando...</Container>}
 
+			<Pagination/>
 
-			<Pagination nroDatos={data.length} perPage={10}   / >
+
+			
 		</Container>
 		)
 		

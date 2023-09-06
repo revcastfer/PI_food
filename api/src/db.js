@@ -40,6 +40,7 @@ Recipe.belongsToMany(Diets,{through:"RecipeDiets"});
 Diets.belongsToMany(Recipe,{through:"RecipeDiets"});
 
 const carga=async()=>{
+ 
   let data=await axios("https://api.spoonacular.com/recipes/complexSearch?apiKey=2a0865bcc2304931b42934bd7906de76&addRecipeInformation=true&number=100");
   let dietasFiltradas=[];
   data.data.results.forEach(ele=>{
@@ -48,7 +49,9 @@ const carga=async()=>{
                                               });
   let dataForBulk=[];
   dietasFiltradas.forEach(ele=>dataForBulk.push({nombre:ele}));
-Diets.bulkCreate(dataForBulk)
+  Diets.bulkCreate(dataForBulk)
+ 
+  
 };
 
 carga();
