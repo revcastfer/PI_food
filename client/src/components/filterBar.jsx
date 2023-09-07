@@ -10,7 +10,8 @@ const Filtros=styled.div`
 display:flex;
 flex-wrap:wrap;
 width:100vw;
-justify-content:space-evenly
+justify-content:space-evenly;
+color:yellow
 `;
 const Container=styled.div`
 display:flex;
@@ -72,18 +73,19 @@ const handleChange=(e)=>{
 					<option value=""  readOnly hidden>seleccionar...</option>
 					{diets?diets.map(diet=><option value={diet}>{diet}</option>):null}
 				</OptionSelect>
+			<b>source:</b>
 				<OptionSelect id="origen" onChange={handleChange}>
 					<option value=""  readOnly hidden>seleccionar...</option>
 					<option value="API">API</option>
 					<option value="FORM">FORM</option>
 				</OptionSelect>
-			healthScore:
+			<b>healthScore:</b>
 				<OptionSelect id="healthScore" onChange={handleChange}>
 					<option  value=""  readOnly hidden>seleccionar...</option>
 					<option value="+">mayor a menor</option>
 					<option value="-">menor a mayor</option>
 				</OptionSelect>	
-			orden :
+			<b>orden :</b>
 				<OptionSelect id="orden" onChange={handleChange}>
 					<option value=""  readOnly hidden>seleccionar...</option>
 					<option value="A">A to Z</option>

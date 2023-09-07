@@ -1,4 +1,4 @@
-const initialState={data:"",datafilter:"",healthScore:"",orden:"",origen:"",dieta:"",pageNumber:""}
+const initialState={data:"",datafilter:"",healthScore:"",orden:"",origen:"",dieta:"",pageNumber:1}
 
 
 const foodReducer=(state=initialState,action)=>{

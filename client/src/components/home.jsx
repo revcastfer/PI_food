@@ -22,7 +22,7 @@ export default function Home(){
 	useEffect(()=>{
 		axios("/recipe")
 		.then(data=>data.data)
-		.then(data=>{dispatch(loguin(data));dispatch(setDataFilter(data)) }
+		.then(data=>{dispatch(loguin(data));dispatch(setDataFilter(data.slice(1,11))) }
 		);
 
 
