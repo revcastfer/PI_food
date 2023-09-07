@@ -6,7 +6,7 @@ const axios=require("axios")
 
 const postRecipe=async(nombre,urlImagen,resumen,nivel,pasos,diets)=>{
 	try {
-		const recipe=await Recipe.create({name:nombre,img:urlImagen,resumenPlato:resumen,score:nivel,steps:pasos});
+		const recipe=await Recipe.create({title:nombre,image:urlImagen,summary:resumen,healtScore:nivel,analyzedInstructions:pasos});
 		let dietas=diets.split(",");	
 	
 
@@ -25,14 +25,14 @@ const postRecipe=async(nombre,urlImagen,resumen,nivel,pasos,diets)=>{
 const getRecipeById=async(id)=>{
 	
 	let letras = new RegExp(/[A-Za-z]+/g);
-	if(letras.test(id)){console.log("uuid");
+	if(letras.test(id)){
 		try{
 			let response=await Recipe.findByPk(id,{include:Diets});
 			return response
 		}
 		catch(err){throw new Error(err)}
-			
-	}else{
+	}
+	else{
 		try{
 			let data=await axios("https://api.spoonacular.com/recipes/complexSearch?apiKey=2a0865bcc2304931b42934bd7906de76&addRecipeInformation=true&number=100");
   			let dietas=data.data.results;
@@ -40,8 +40,6 @@ const getRecipeById=async(id)=>{
   			return dieta
   		}
 		catch(err){throw new Error(err)}
-
-
 	}
 }
 
@@ -53,11 +51,10 @@ const getRecipeByName=async(name)=>{
 		try{
 		if(name){
 			let filterApi=recetasApi.filter(ele=>ele.title===name);
-			console.log(filterApi);
-			let filterData=recetas.filter(ele=>ele.name.toLowerCase()===name.toLowerCase());
-			console.log(filterData);
+			let filterData=recetas.filter(ele=>ele.title.toLowerCase()===name.toLowerCase());
 			return filterData.concat(filterApi)
-		}else{
+		}
+		else{
 			
 			return recetas.concat(recetasApi)
 

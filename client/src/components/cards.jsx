@@ -20,10 +20,15 @@ justify-content:space-evenly
 export default function Cards(){
 	const data=useSelector(state=>state.data);
 	const recipes=useSelector(state=>state.datafilter);
-
-
-
+	const healthScore=useSelector(state=>state.healthScore);
+	const orden=useSelector(state=>state.orden);
+	const origen=useSelector(state=>state.origen);
+	const dieta=useSelector(state=>state.dieta);
 	
+
+
+
+
 
 
 
@@ -33,7 +38,7 @@ export default function Cards(){
 	return(
 		<Container>
 			
-		 	<FilterBar/>
+		 	 
 
 			{recipes?<Container>
 				{ recipes.map( recipe=><Card recipe={recipe}/> ) }

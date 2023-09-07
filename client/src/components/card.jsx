@@ -19,13 +19,13 @@ border-radius:21px
 `;
 
 export default function Card(props){
-	const {id,title,image,healthScore,name,img,score}=props.recipe;
+	const {id,title,image,healthScore}=props.recipe;
 	return(
 		<Container>
 			
-			<RecipeImg src={image?image:img} alt={`imagen de ${title}`} />
-			<RecipeNombre><NavLink to={`/detail/${id}`} >{title?title:name}</NavLink></RecipeNombre>
-			<RecipeScore>healthScore: {healthScore?healthScore:score}</RecipeScore>
+			<RecipeImg src={image} alt={`imagen de ${title}`} />
+			<RecipeNombre><NavLink to={`/detail/${id}`} >{title}</NavLink></RecipeNombre>
+			<RecipeScore>healthScore: {healthScore}</RecipeScore>
 		</Container>
 		)
 }

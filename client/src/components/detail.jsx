@@ -41,11 +41,11 @@ export default function Detail(){
 			<NavLink to="/home/cards">back to home</NavLink>
 			{recipe?<detailContainer><RecipeImg src={recipe.image?recipe.image:recipe.img} />
 			
-			<RecipeNombre>{recipe.title?recipe.title:recipe.name}</RecipeNombre>
-			<RecipeResumen>{recipe.summary?recipe.summary:recipe.resumenPlato}</RecipeResumen>
-			<RecipeScore>{recipe.healtScore?recipe.healtScore:recipe.score}</RecipeScore>
+			<RecipeNombre>{recipe.title?recipe.title:null}</RecipeNombre>
+			<RecipeResumen>{recipe.summary?recipe.summary:null}</RecipeResumen>
+			<RecipeScore>{recipe.healtScore?recipe.healtScore:null}</RecipeScore>
 			<RecipeTipe>{recipe.diets?recipe.diets.map(diet=><div>diet</div>):"falta"}</RecipeTipe>
-			<RecipeSteps>{recipe.analyzedInstructions?recipe.analyzedInstructions.map(step=><div>step</div>):"falta"}</RecipeSteps>
+			<RecipeSteps>{recipe.analyzedInstructions?recipe.analyzedInstructions.map(step=><div>step</div>):null}</RecipeSteps>
 			</detailContainer>:<div>cargando...</div>}
 				
 			
