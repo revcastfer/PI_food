@@ -55,29 +55,29 @@ export default function FilterBar(){
 
 		const filterOrigen=(ele,valor)=>{
 			switch(valor){
-			case "API"
+			case "API":
 				return ele.filter(recipe=>typeof recipe.id==="number");
-			case "FORM"
+			case "FORM":
 				return ele.filter(recipe=>typeof recipe.id!="number");
-			default
+			default:
 				return ele
 		};
 		const filterHealth=(ele,valor)=>{
 			switch(valor){
-			case "+"
+			case "+":
 				return ele.sort( (a,b)=> a.healthScore-b.healthScore );
-			case "-"
+			case "-":
 				return ele.healthScore.sort(function(a, b){return b.healthScore-a.healthScore});
-			default
+			default:
 				return ele
 		};
 		const filterOrden=(ele,valor)=>{
 			switch(valor){
-			case "A"
+			case "A":
 				return ele.sort((x, y) => x.title.localeCompare(y.title));
-			case "Z"
-				return return ele.sort((x, y) => y.title.localeCompare(x.title));
-			default
+			case "Z":
+				return ele.sort((x, y) => y.title.localeCompare(x.title));
+			default:
 				return ele
 		};
 		const filterDietas=(ele,dietas)=>{
