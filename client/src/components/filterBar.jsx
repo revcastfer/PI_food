@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import axios from "axios"
 import {useState,useEffect} from "react"
-import {dieta,origen,orden,healthScore} from "../redux/actions.js"
+import {setDataFilter} from "../redux/actions.js"
 import {useSelector,useDispatch} from 'react-redux'
 import SearchBar from "./searchBar.jsx"
 
@@ -36,15 +36,8 @@ export default function FilterBar(){
 				.then(data=>{setDiets(data)});
 				console.log(diets)
 			}
-	},[diets]);
+	},[diets]);	
 
-
-
-	const filterExe=()=>{
-
-		let dataFiltrada=filterOrden(filterHealth(filterDietas(filterOrigen(recipes,origen),dieta),healthScore),orden);
-		dispatch(setDataFilter(dataFiltrada))
-	};
 
 	const handleChange=(e)=>{
 		const origen=document.getElementById("origen").value;
@@ -61,7 +54,8 @@ export default function FilterBar(){
 				return ele.filter(recipe=>typeof recipe.id!="number");
 			default:
 				return ele
-		};
+			};
+		}
 		const filterHealth=(ele,valor)=>{
 			switch(valor){
 			case "+":
@@ -70,7 +64,8 @@ export default function FilterBar(){
 				return ele.healthScore.sort(function(a, b){return b.healthScore-a.healthScore});
 			default:
 				return ele
-		};
+			};
+		}
 		const filterOrden=(ele,valor)=>{
 			switch(valor){
 			case "A":
@@ -79,6 +74,7 @@ export default function FilterBar(){
 				return ele.sort((x, y) => y.title.localeCompare(x.title));
 			default:
 				return ele
+			}
 		};
 		const filterDietas=(ele,dietas)=>{
 			let result=[];
@@ -86,10 +82,14 @@ export default function FilterBar(){
 			return result
 		};
 
-		filterExe();
-		
-	}
-	
+		const filterExe=()=>{
+			let dataFiltrada=filterOrden(filterHealth(filterDietas(filterOrigen(recipes,origen),dieta),healthScore),orden);
+			dispatch(setDataFilter(dataFiltrada))
+		};	
+
+		filterExe();	
+	};
+	console.log(diets)
 	return(
 		<Container>
 			<Filtros onChange={handleChange}>

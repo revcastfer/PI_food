@@ -1,4 +1,4 @@
-const initialState={data:"",datafilter:"",healthScore:"ALL",orden:"ALL",origen:"ALL",dieta:"ALL",pageNumber:1}
+const initialState={data:"",datafilter:"",dataSplit:"" ,pageNumber:1}
 
 
 const foodReducer=(state=initialState,action)=>{
@@ -7,14 +7,9 @@ const foodReducer=(state=initialState,action)=>{
 		return {...state,data:action.payload}
 	case "datafilter":
 		return {...state,datafilter:action.payload}
-	case "dieta":
-		return {...state,dieta:action.payload}
-	case "origen":
-		return {...state,origen:action.payload}
-	case "orden":
-		return {...state,orden:action.payload}
-	case "healthScore":
-		return {...state,healthScore:action.payload}
+	case "dataSplit":
+		return {...state,dataSplit:action.payload}
+	
 	case "pageNumber":
 		return {...state,pageNumber:action.payload}
 	default:

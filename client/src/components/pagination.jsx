@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useDispatch,useSelector } from 'react-redux'
-import {setPageNumber,setDataFilter} from "../redux/actions.js"
+import {setPageNumber,setDataFilter,setDataSplit} from "../redux/actions.js"
 
 const Container=styled.div`
 width:100vw;
@@ -23,8 +23,8 @@ const Pagina=styled.div`
 
 export default function Pagination(props){
 	const {nroDatos,perPage} = props;
-	console.log(props);
-	const data=useSelector(state=>state.data);
+	
+	const data=useSelector(state=>state.dataFilter);
 	let pageNumber=useSelector(state=>state.pageNumber);
 	const dispatch=useDispatch();
 
@@ -40,7 +40,7 @@ export default function Pagination(props){
 	const handelClick=(e)=>{
 		
 		dispatch(setPageNumber(e.target.id))
-		dispatch(setDataFilter(displayDiets))
+		dispatch(setDataSplit(displayDiets))
 	}
 
 
