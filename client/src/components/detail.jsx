@@ -34,23 +34,25 @@ export default function Detail(){
 			if(!recipe){
 				axios(`/recipe/${id}`)
 			.then(data=>data.data)
-			.then(data=>{setRecipe(data);console.log(data)});
+			.then(data=>{setRecipe(data)});
 			}
 			
 		},[recipe,id]);
-	
+	console.log(recipe)
 	return(
 		<Container>
 			<NavLink to="/home/cards">back to home</NavLink>
-			{recipe?<DetailContainer><RecipeImg src={recipe.image} />
+			{recipe?<DetailContainer><RecipeImg src={recipe[0].image} />
 			
-			<RecipeNombre>{recipe.title}</RecipeNombre>
-			<RecipeResumen>{recipe.summary}</RecipeResumen>
-			<RecipeScore>{recipe.healtScore}</RecipeScore>
-			<RecipeTipe>{recipe.diets.map(diet=><div>{diet}</div>)}</RecipeTipe>
-			<RecipeSteps>{recipe.analyzedInstructions.steps.map(paso=><div><div>{paso.number}</div>{paso.step}</div>)}</RecipeSteps>
-			</DetailContainer>:<div>cargando...</div>}
-				
+			<RecipeNombre>{recipe[0].title}</RecipeNombre>
+			<RecipeResumen>{recipe[0].summary}</RecipeResumen>
+			<RecipeScore>{recipe[0].healthScore}</RecipeScore>
+			<RecipeTipe>{recipe[0].diets.map(diet=><div>{diet}</div>)}</RecipeTipe>
+			<RecipeSteps>{recipe[0].analyzedInstructions[0].steps.map(paso=><div>{paso.number+".- "+paso.step}</div>)}</RecipeSteps>
+
+			</DetailContainer>:
+
+			<div>fer</div>}		
 			
 
 

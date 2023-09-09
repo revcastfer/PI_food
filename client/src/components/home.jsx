@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Navbar from "./navbar.jsx";
 import axios from 'axios';
 import menu from "../imgs/menu.jpg";
-import {loguin,setDataFilter,setDataSplit} from '../redux/actions.js'
+import {loguin,setDataFilter} from '../redux/actions.js'
 import {Outlet} from "react-router-dom"
 import { useDispatch} from 'react-redux'
 import { useNavigate } from "react-router-dom"

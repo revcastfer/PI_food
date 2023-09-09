@@ -10,7 +10,7 @@ const postRecipeHandler=async(req,res)=>{
 		let response= await postRecipe(nombre,urlImagen,resumen,nivel,pasos,dietas);
 		res.status(200).json(response)
 	}
-	catch(err){throw new Error(err.message)}
+	catch(err){res.status(500).json(err.message)}
 }
 
 const getRecipeByIdHandler=async(req,res)=>{

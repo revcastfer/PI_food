@@ -1,4 +1,4 @@
-const initialState={data:"",datafilter:"",dataSplit:"" ,pageNumber:1}
+const initialState={data:"",datafilter:"",dataSplit:"" ,pageNumber:1,dietsSelected:"",nroPasos:0,pasos:""}
 
 
 const foodReducer=(state=initialState,action)=>{
@@ -8,10 +8,15 @@ const foodReducer=(state=initialState,action)=>{
 	case "datafilter":
 		return {...state,datafilter:action.payload}
 	case "dataSplit":
-		return {...state,dataSplit:action.payload}
-	
+		return {...state,dataSplit:action.payload}	
 	case "pageNumber":
 		return {...state,pageNumber:action.payload}
+	case "dietsSelected":
+		return {...state,dietsSelected:action.payload}
+	case "nroPasos":
+		return {...state,nroPasos:action.payload}
+	case "pasos":
+		return {...state,pasos:action.payload}
 	default:
 		return{...state}
 

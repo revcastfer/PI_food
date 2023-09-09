@@ -26,6 +26,7 @@ const OptionSelect=styled.select`
 export default function FilterBar(){
 	const [diets,setDiets]=useState();	
 	const recipes=useSelector(state=>state.data);
+	const recipesfilter=useSelector(state=>state.datafilter);
 	const dispatch=useDispatch();
 
 	
@@ -36,7 +37,7 @@ export default function FilterBar(){
 				.then(data=>data.data)
 				.then(data=>{setDiets(data)});
 							};
-	},[recipes]);	
+	},[recipesfilter]);	
 
 	
 

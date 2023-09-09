@@ -9,15 +9,17 @@ const {
 const postRecipe=async(nombre,urlImagen,resumen,nivel,pasos,diets)=>{
 	try {
 		const recipe=await Recipe.create({title:nombre,image:urlImagen,summary:resumen,healtScore:nivel,analyzedInstructions:pasos});
-		let dietas=diets.split(",");	
+		let dietas=diets.split(",");
+
 	
 
 		dietas.forEach( async dieta=>{
 	    	let finder = await Diets.findOne({where:{nombre:dieta}});
+	    	console.log(finder);
 	    	await recipe.addDiets(finder)
 		});	
 
-		let newRecipe=await Recipe.findOne({where:{name:recipe.name},include:Diets});
+		let newRecipe=await Recipe.findOne({where:{title:recipe.title},include:Diets});
 		return  newRecipe
 	}
 	catch(err){throw new Error (err)}
