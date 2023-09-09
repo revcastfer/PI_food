@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require("axios")
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST,API_KEY
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
@@ -40,8 +40,8 @@ Recipe.belongsToMany(Diets,{through:"RecipeDiets"});
 Diets.belongsToMany(Recipe,{through:"RecipeDiets"});
 
 const carga=async()=>{
- 
-  let data=await axios("https://api.spoonacular.com/recipes/complexSearch?apiKey=2a0865bcc2304931b42934bd7906de76&addRecipeInformation=true&number=100");
+ //key= 2a0865bcc2304931b42934bd7906de76
+  let data=await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
   let dietasFiltradas=[];
   data.data.results.forEach(ele=>{
                         ele.diets.forEach(diet=>{
@@ -54,7 +54,7 @@ const carga=async()=>{
   
 };
 
-carga();
+//carga();
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

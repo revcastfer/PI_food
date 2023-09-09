@@ -25,19 +25,24 @@ const OptionSelect=styled.select`
 
 export default function FilterBar(){
 	const [diets,setDiets]=useState();
+	const [dataFiltrada,setDatafiltrada]=useState();
 	const recipes=useSelector(state=>state.data);
 	const dispatch=useDispatch();
-	
 
+	
 	useEffect(()=>{
+		console.log(dataFiltrada);
 			if(!diets){
 				axios(`/diets`)
 				.then(data=>data.data)
 				.then(data=>{setDiets(data)});
-				console.log(diets)
-			}
-	},[diets]);	
+							};
+		if(dataFiltrada){dispatch(setDataFilter(dataFiltrada))}
 
+console.log(dataFiltrada);
+	},[dataFiltrada]);	
+
+	
 
 	const handleChange=(e)=>{
 		const origen=document.getElementById("origen").value;
@@ -46,56 +51,33 @@ export default function FilterBar(){
 		const orden=document.getElementById("orden").value;
 
 
-		const filterOrigen=(ele,valor)=>{
-			switch(valor){
-			case "API":
-				return ele.filter(recipe=>typeof recipe.id==="number");
-			case "FORM":
-				return ele.filter(recipe=>typeof recipe.id!="number");
-			default:
-				return ele
-			};
-		}
-		const filterHealth=(ele,valor)=>{
-			switch(valor){
-			case "+":
-				return ele.sort( (a,b)=> a.healthScore-b.healthScore );
-			case "-":
-				return ele.healthScore.sort(function(a, b){return b.healthScore-a.healthScore});
-			default:
-				return ele
-			};
-		}
+	
 		const filterOrden=(ele,valor)=>{
 			switch(valor){
-			case "A":
+			case "A":				
 				return ele.sort((x, y) => x.title.localeCompare(y.title));
 			case "Z":
-				return ele.sort((x, y) => y.title.localeCompare(x.title));
+				return ele.sort((x, y) => x.title.localeCompare(y.title)).reverse();
 			default:
 				return ele
 			}
 		};
-		const filterDietas=(ele,dietas)=>{
-			let result=[];
-			ele.forEach(ele=>{ if(ele.diets.includes(dieta)&&!result.includes(dieta)) {result.push(ele)} }) 
-			return result
-		};
+		
 
 		const filterExe=()=>{
-			let dataFiltrada=filterOrden(filterHealth(filterDietas(filterOrigen(recipes,origen),dieta),healthScore),orden);
-			dispatch(setDataFilter(dataFiltrada))
+			setDatafiltrada(filterOrden(recipes,orden)) ;
+						
 		};	
 
 		filterExe();	
 	};
-	console.log(diets)
+	
 	return(
 		<Container>
 			<Filtros onChange={handleChange}>
 				<OptionSelect id="dieta" >
 					<option value="ALL">ALL</option>
-					{diets?diets.map(diet=><option value={diet.nombre}>{diet.nombre}</option>):null}
+					{diets?diets.map(diet=><option key={diet.nombre} value={diet.nombre}>{diet.nombre}</option>):null}
 				</OptionSelect>
 			<b>source:</b>
 				<OptionSelect id="origen" >

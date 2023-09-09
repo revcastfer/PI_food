@@ -18,24 +18,30 @@ justify-content:space-evenly
 
 
 export default function Cards(){
-	const data=useSelector(state=>state.datafilter);
-	const recipes=useSelector(state=>state.dataSplit);
+	console.log("cards");
+	const data=useSelector(state=>state.dataSplit);
+	const [recipes,setRecipes]=useState();
 
 
-	console.log(recipes)
+useEffect(() => {
+    setRecipes(data);
+  }, [data]);
+	
+
+
+	
 
 	return(
 		<Container>
 			
-		 	 <FilterBar/>
+		 	<FilterBar/>
 
-			{recipes?<Container>
-				{ recipes.map( recipe=><Card recipe={recipe}/> ) }
+			{data?<Container>
+				{ data.map( recipe=><Card key={recipe.id} recipe={recipe}/> ) }
 					</Container>
-			:<Container>cargando...</Container>}
+			:<Container>cargando....</Container>}
 
-			{data?<Pagination nroDatos={data.length} perPage={10} />:null}
-
+			<Pagination />
 
 			
 		</Container>
