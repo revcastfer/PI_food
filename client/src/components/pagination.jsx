@@ -25,6 +25,7 @@ const Pagina=styled.div`
 export default function Pagination(props){
 	let pageNumber=useSelector(state=>state.pageNumber);
 	const nroDatos=useSelector(state=>state.datafilter).length;
+	const datafilter=useSelector(state=>state.datafilter);
 	const perPage=10;
 	const data =useSelector(state=>state.datafilter);
 	const dispatch=useDispatch();
@@ -50,7 +51,7 @@ export default function Pagination(props){
 	useEffect(()=>{
 		console.log("efect");
 		spliter();
-	},[data,pageNumber])
+	},[data,pageNumber,datafilter])
 
 	
 

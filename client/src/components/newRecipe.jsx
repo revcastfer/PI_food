@@ -56,6 +56,7 @@ export default function NewRecipe(){
 
 	const validacion=(e)=>{
 		let id=e.target.id;
+		console.log(id)
 		
 	}
 
@@ -63,23 +64,23 @@ export default function NewRecipe(){
 	return( 
 		<Container>
 			<Option>
-				<RecipeNombre id="nombre" type="text" placeholder="nombre"/>
+				<RecipeNombre onChange={validacion} id="nombre" type="text" placeholder="nombre"/>
 				<ErrorData id="errornombre"><b>no vacio,no numeros</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeImg id="imagen" type="url" placeholder="imagen url"/>
+				<RecipeImg onChange={validacion}  id="imagen" type="url" placeholder="imagen url"/>
 				<ErrorData id="errorimagen"><b>no vacio</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeScore id="healthScore" type="number" placeholder="healt Score"/>
+				<RecipeScore onChange={validacion}  id="healthScore" type="number" placeholder="healt Score"/>
 				<ErrorData id="errorhealthScore"><b>elegir puntuacion</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeResumen id="resumen" rows="5" cols="43" placeholder="resumen"/>
+				<RecipeResumen onChange={validacion} id="resumen" rows="5" cols="43" placeholder="resumen"/>
 				<ErrorData id="errorresumen"><b>no vacio</b></ErrorData>
 			</Option>
 			{diets?<Option>
-						<CheckComponent id="dietas" options={diets} legend="seleccionar dieta" />
+						<CheckComponent onChange={validacion}  id="dietas" options={diets} legend="seleccionar dieta" />
 						<ErrorData id="errordietas"><b>seleccionar dieta(s)</b></ErrorData>
 					</Option>:null}
 			<Option>

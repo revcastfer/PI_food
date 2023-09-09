@@ -24,23 +24,19 @@ const OptionSelect=styled.select`
  `;
 
 export default function FilterBar(){
-	const [diets,setDiets]=useState();
-	const [dataFiltrada,setDatafiltrada]=useState();
+	const [diets,setDiets]=useState();	
 	const recipes=useSelector(state=>state.data);
 	const dispatch=useDispatch();
 
 	
 	useEffect(()=>{
-		console.log(dataFiltrada);
+		
 			if(!diets){
 				axios(`/diets`)
 				.then(data=>data.data)
 				.then(data=>{setDiets(data)});
 							};
-		if(dataFiltrada){dispatch(setDataFilter(dataFiltrada))}
-
-console.log(dataFiltrada);
-	},[dataFiltrada]);	
+	},[recipes]);	
 
 	
 
@@ -65,7 +61,8 @@ console.log(dataFiltrada);
 		
 
 		const filterExe=()=>{
-			setDatafiltrada(filterOrden(recipes,orden)) ;
+			dispatch(setDataFilter(filterOrden(recipes,orden)))
+			
 						
 		};	
 

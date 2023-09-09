@@ -8,7 +8,7 @@ import {useState,useEffect} from "react"
 
 const Container=styled.div`
 `;
-const detailContainer=styled.div`
+const DetailContainer=styled.div`
 `;
 const RecipeNombre=styled.div`
 `;
@@ -31,22 +31,25 @@ export default function Detail(){
 	const id=useParams().id;
 	const [recipe,setRecipe]=useState();
 		useEffect(()=>{
-			axios(`/recipe/${id}`)
+			if(!recipe){
+				axios(`/recipe/${id}`)
 			.then(data=>data.data)
 			.then(data=>{setRecipe(data);console.log(data)});
+			}
+			
 		},[recipe,id]);
 	
 	return(
 		<Container>
 			<NavLink to="/home/cards">back to home</NavLink>
-			{recipe?<detailContainer><RecipeImg src={recipe.image?recipe.image:recipe.img} />
+			{recipe?<DetailContainer><RecipeImg src={recipe.image} />
 			
-			<RecipeNombre>{recipe.title?recipe.title:null}</RecipeNombre>
-			<RecipeResumen>{recipe.summary?recipe.summary:null}</RecipeResumen>
-			<RecipeScore>{recipe.healtScore?recipe.healtScore:null}</RecipeScore>
-			<RecipeTipe>{recipe.diets?recipe.diets.map(diet=><div>diet</div>):"falta"}</RecipeTipe>
-			<RecipeSteps>{recipe.analyzedInstructions?recipe.analyzedInstructions.map(step=><div>step</div>):null}</RecipeSteps>
-			</detailContainer>:<div>cargando...</div>}
+			<RecipeNombre>{recipe.title}</RecipeNombre>
+			<RecipeResumen>{recipe.summary}</RecipeResumen>
+			<RecipeScore>{recipe.healtScore}</RecipeScore>
+			<RecipeTipe>{recipe.diets.map(diet=><div>{diet}</div>)}</RecipeTipe>
+			<RecipeSteps>{recipe.analyzedInstructions.steps.map(paso=><div><div>{paso.number}</div>{paso.step}</div>)}</RecipeSteps>
+			</DetailContainer>:<div>cargando...</div>}
 				
 			
 

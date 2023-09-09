@@ -20,6 +20,7 @@ justify-content:space-evenly
 export default function Cards(){
 	console.log("cards");
 	const data=useSelector(state=>state.dataSplit);
+	
 	const [recipes,setRecipes]=useState();
 
 
