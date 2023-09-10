@@ -2,6 +2,7 @@ import styled from "styled-components"
 import Card from "./card.jsx"
 import FilterBar from "./filterBar.jsx"
 import Pagination from "./pagination.jsx"
+import NotFound from "./notfound.jsx"
 import {useState,useEffect} from "react"
 import { useSelector } from 'react-redux'
 

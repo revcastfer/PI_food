@@ -30,29 +30,42 @@ const RecipeTipe=styled.div`
 export default function Detail(){
 	const id=useParams().id;
 	const [recipe,setRecipe]=useState();
+	const [stepsProcess,setStepsProcess]=useState();
 		useEffect(()=>{
 			if(!recipe){
 				axios(`/recipe/${id}`)
 			.then(data=>data.data)
-			.then(data=>{setRecipe(data)});
-			}
+			.then(data=>setRecipe(data[0]));
+			};
+
+			
+			
+
 			
 		},[recipe,id]);
-	console.log(recipe)
+
+
+
+
+
 	return(
 		<Container>
 			<NavLink to="/home/cards">back to home</NavLink>
-			{recipe?<DetailContainer><RecipeImg src={recipe[0].image} />
+			{recipe?<DetailContainer><RecipeImg src={recipe.image} />
 			
-			<RecipeNombre>{recipe[0].title}</RecipeNombre>
-			<RecipeResumen>{recipe[0].summary}</RecipeResumen>
-			<RecipeScore>{recipe[0].healthScore}</RecipeScore>
-			<RecipeTipe>{recipe[0].diets.map(diet=><div>{diet}</div>)}</RecipeTipe>
-			<RecipeSteps>{recipe[0].analyzedInstructions[0].steps.map(paso=><div>{paso.number+".- "+paso.step}</div>)}</RecipeSteps>
+			<RecipeNombre>{recipe.title}</RecipeNombre>
+			<RecipeResumen>{recipe.summary}</RecipeResumen>
+			<RecipeScore>{recipe.healthScore}</RecipeScore>
+			<RecipeTipe>{recipe.diets.map(diet=>{if(!diet.nombre){return <div>{diet}</div>}
+												else{return <div>{diet.nombre}</div>}
+												})}</RecipeTipe>
+			{recipe.analyzedInstructions?
+			<RecipeSteps>{recipe.analyzedInstructions[0].steps.map(paso=><div>{paso.number+".- "+paso.step}</div>)}</RecipeSteps>:
+			<RecipeSteps>{recipe.steps.split("^").map(paso=><div>{"- "+paso}</div>)}</RecipeSteps>}
 
 			</DetailContainer>:
 
-			<div>fer</div>}		
+			<div>cargando...</div>}		
 			
 
 

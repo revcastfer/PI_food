@@ -8,7 +8,7 @@ const {
 
 const postRecipe=async(nombre,urlImagen,resumen,nivel,pasos,diets)=>{
 	try {
-		const recipe=await Recipe.create({title:nombre,image:urlImagen,summary:resumen,healtScore:nivel,analyzedInstructions:pasos});
+		const recipe=await Recipe.create({title:nombre,image:urlImagen,summary:resumen,healthScore:nivel,steps:pasos});
 		let dietas=diets.split(",");
 
 	
@@ -32,7 +32,9 @@ const getRecipeById=async(id)=>{
 	if(letras.test(id)){
 		try{
 			let response=await Recipe.findByPk(id,{include:Diets});
-			return response
+			let rpta=[]
+			rpta.push(response);
+			return rpta
 		}
 		catch(err){throw new Error(err)}
 	}
@@ -19895,11 +19897,11 @@ const getRecipeByName=async(name)=>{
 ]
 };
 	let recetasApi=data.results;
-	let recetas=await Recipe.findAll();
+	let recetas=await Recipe.findAll({include:Diets});
 		try{
 		if(name){
-			let filterApi=recetasApi.filter(ele=>ele.title===name);
-			let filterData=recetas.filter(ele=>ele.title.toLowerCase()===name.toLowerCase());
+			let filterApi=recetasApi.filter(ele=>ele.title.toLowerCase().includes(name.toLowerCase()));
+			let filterData=recetas.filter(ele=>ele.title.toLowerCase().includes(name.toLowerCase()));
 			return filterData.concat(filterApi)
 		}
 		else{

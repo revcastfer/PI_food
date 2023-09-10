@@ -27,7 +27,7 @@ const getRecipeByNameHandler=async(req,res)=>{
 		let resp=await getRecipeByName(req.query.name);
 		res.status(200).json(resp)
 	}
-	catch(err){throw new Error(err.message)}
+	catch(err){res.status(500).json(err.message)}
 	
 
 }
