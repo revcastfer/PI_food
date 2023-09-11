@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import axios from "axios"
+import detalleFondo from "../imgs/detalle.jpeg"
 import { NavLink,useParams } from "react-router-dom";
 import {useState,useEffect} from "react"
 
@@ -7,6 +8,13 @@ import {useState,useEffect} from "react"
 
 
 const Container=styled.div`
+
+
+background : url(${detalleFondo});
+background-size:cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
 `;
 const DetailContainer=styled.div`
 `;
@@ -36,13 +44,10 @@ export default function Detail(){
 				axios(`/recipe/${id}`)
 			.then(data=>data.data)
 			.then(data=>setRecipe(data[0]));
-			};
-
-			
-			
-
-			
+			};			
 		},[recipe,id]);
+
+		
 
 
 

@@ -28,6 +28,7 @@ export default function FilterBar(){
 	const recipes=useSelector(state=>state.data);
 	const recipesfilter=useSelector(state=>state.datafilter);
 	const dispatch=useDispatch();
+	console.log("filter bar");
 
 	
 	useEffect(()=>{
@@ -72,25 +73,25 @@ export default function FilterBar(){
 	
 	return(
 		<Container>
-			<Filtros onChange={handleChange}>
-				<OptionSelect id="dieta" >
+			<Filtros>
+				<OptionSelect  onChange={handleChange} id="dieta" >
 					<option value="ALL">ALL</option>
 					{diets?diets.map(diet=><option key={diet.nombre} value={diet.nombre}>{diet.nombre}</option>):null}
 				</OptionSelect>
 			<b>source:</b>
-				<OptionSelect id="origen" >
+				<OptionSelect  onChange={handleChange} id="origen" >
 					<option value="ALL">ALL</option>
 					<option value="API">API</option>
 					<option value="FORM">FORM</option>
 				</OptionSelect>
 			<b>healthScore:</b>
-				<OptionSelect id="healthScore">
+				<OptionSelect  onChange={handleChange} id="healthScore">
 					<option value="ALL">ALL</option>
 					<option value="+">mayor a menor</option>
 					<option value="-">menor a mayor</option>
 				</OptionSelect>	
 			<b>orden :</b>
-				<OptionSelect id="orden" >
+				<OptionSelect  onChange={handleChange} id="orden" >
 					<option value="ALL">ALL</option>
 					<option value="A">A to Z</option>
 					<option value="Z">Z to A</option>

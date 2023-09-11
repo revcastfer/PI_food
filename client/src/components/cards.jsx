@@ -20,19 +20,21 @@ justify-content:space-evenly
 
 export default function Cards(){
 	console.log("cards");
-	const data=useSelector(state=>state.dataSplit);	
+	const data=useSelector(state=>state.dataSplit);
+	const datafilter=useSelector(state=>state.datafilter);	
 
 	return(
 		<Container>
-			
-		 	<FilterBar/>
+			<FilterBar/>
+			{datafilter.length>0?<div> 	
 
 			{data?<Container>
 				{ data.map( recipe=><Card key={recipe.id} recipe={recipe}/> ) }
 					</Container>
-			:<Container>cargando....</Container>}
+			:<Container>cargando..</Container>}
 
 			<Pagination />
+			</div>:<NotFound/>}
 
 			
 		</Container>
