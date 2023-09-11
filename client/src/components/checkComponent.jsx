@@ -32,7 +32,7 @@ export default function CheckComponent(props){
 			<fieldset onChange={scaningOptions}>
   				<legend>Choose Diets</legend>
   				{options?options.map(option=> 
-  				<Option>
+  				<Option key={`chk${option.nombre}`}>
   					<input type="checkbox" id={option.nombre}  value={option.nombre} className="checks" />
     				<label htmlFor={option.nombre}>{option.nombre}</label>
   				</Option>

@@ -10,56 +10,49 @@ flex-wrap:wrap;
 
  `;
 
+const Flag=styled.div`
+	font-size:35px
+  `;
+
 export default function InputsGenerate(){
-	const [numberOfSteps,setNumberOfSteps]=useState(1);
+	const [numberOfSteps,setNumberOfSteps]=useState(0);	
 	const dispatch=useDispatch();
+	const nroPasos=10;
+
+	const flag=[];
+	for (let i=1;i<=nroPasos;i++){flag.push(i)}
 
 
 	const handleWrite=()=>{
-	
-		setStepsDetail();
-		if(document.getElementById(numberOfSteps).value.length>0){
-			if(!document.getElementById(numberOfSteps+1)){
-			cretateStep();
 
-			if(document.getElementById(1).value.length>0){
-				dispatch(setNroPasos(numberOfSteps));
-			}
-			}
-		};
-	}
+		let tempSteps=[];
+		let cont=0;
+		flag.forEach(step=>{let valor=document.getElementById(step).value.trim();
+								if(valor.length>0){
+									cont=cont+1  ;								
+									tempSteps.push(valor)
+								}
+		})
+	;
 
-	const cretateStep=()=>{
-	
-		let contenedor=document.getElementById("container");	
-		let temporalText=document.createElement("textarea");
-		const newNumberOfSteps = numberOfSteps + 1;
-		temporalText.setAttribute("id", newNumberOfSteps);
-		temporalText.setAttribute("cols", "50");
-		temporalText.setAttribute("rows", "3");
-		temporalText.setAttribute("type", "text");
-		temporalText.setAttribute("placeholder", `ingrese paso N°${newNumberOfSteps}`);	
-		temporalText.addEventListener("onChangenge", handleWrite)
-		contenedor.appendChild(temporalText);
+		dispatch(setNroPasos(cont));
+		if(tempSteps.length>0){let pasosStr=tempSteps.join("^");dispatch(pasos(pasosStr))}
+		else{dispatch(pasos(""))}
 		
-		setNumberOfSteps(newNumberOfSteps);
+	}
+
 	
-	}
 
-	const setStepsDetail=()=>{
-		let textos="";
-		for (let i=0;i<numberOfSteps-1;i++){
-			textos=textos+document.getElementById(i+1).value+"^"
-		};
-		dispatch(pasos(textos.slice(0, -1)))
-	}
-
-
+	
 
 	return(
+
 <Container id="container" >
 	
-		<textarea id={1} onChange={handleWrite} cols="50" rows="3" type="text" placeholder="ingrese paso"/> 
+		{flag.map(number=>
+			<div key={`gen${number}`}>
+				<textarea id={number}  onChange={handleWrite} cols="60" rows="3" type="text" placeholder={`ingrese paso ${number}`}/>			
+			</div>)}
 
 
 </Container>

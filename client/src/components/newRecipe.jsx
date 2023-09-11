@@ -4,13 +4,14 @@ import {useSelector} from 'react-redux'
 import axios from "axios"
 import CheckComponent from "./checkComponent.jsx"
 import InputsGenerate from "./inputsGenerate.jsx"
+import { useNavigate } from "react-router-dom"
 
 
 const Container=styled.div`
 display:flex;
-flex-direction:column;
+height:100vh;
 justify-content: center;
-width:100vw;
+color:orange
 
 `;
 
@@ -56,6 +57,7 @@ export default function NewRecipe(){
 	const nroPasos=useSelector(state=>state.nroPasos);
 	const pasos=useSelector(state=>state.pasos);
 	const [dataReady,setDataReady]=useState({nombre:0,imagen:0,score:0,resumen:0});
+	const navigate = useNavigate();
 
 
 	useEffect(()=>{
@@ -117,9 +119,20 @@ export default function NewRecipe(){
 
 	const send=(e)=>{
 		e.preventDefault();
-		console.log(dataReady)
-		if(dataReady.nombre===1 && dataReady.imagen===1 && dataReady.score===1 && dataReady.resumen===1 && nroPasos>0 && dietsSelected.length>0 )
-			{alert("venga el´post")}else{alert("hay campos sin llenar ")}
+		if(dataReady.nombre===1 && dataReady.imagen===1 && dataReady.score===1 && dataReady.resumen===1 && nroPasos>0 && dietsSelected.length>0 ){
+			try{
+				const nombre=document.getElementById("nombre").value;
+				const imagen=document.getElementById("imagen").value;
+				const healt=document.getElementById("healthScore").value;
+				const summary=document.getElementById("resumen").value;
+				const stepString=dietsSelected.join();
+
+				console.log(nombre+imagen+healt+summary+stepString+pasos);
+				axios.post("/recipe",{nombre:nombre ,resumen:summary ,nivel:healt ,pasos:pasos ,dietas:stepString ,urlImagen:imagen })
+				.then(()=>{alert("receta agregada");navigate("/home/cards")})
+			}catch(err){console.log(err)}
+		}
+		else{alert("hay campos sin llenar ")}
 		
 	};
 
@@ -146,14 +159,15 @@ export default function NewRecipe(){
 						<CheckComponent onChange={validacion}  id="dietas" options={diets} legend="seleccionar dieta" />
 						<ErrorData id="errordietas" className="error"><b>seleccionar dieta(s)</b></ErrorData>
 					</Option>:null}
+			
+			<SendButtom type="submit">Send</SendButtom>
+			</form>
 			<Option>
 				<RecipeSteps >			 
 			 		<InputsGenerate id="pasos" />
 			 		<ErrorData id="errorpasos" className="error"><b>ingresar pasos</b></ErrorData>
 				</RecipeSteps>
 			</Option>
-			<SendButtom type="submit">Send</SendButtom>
-			</form>
 	
 
 			

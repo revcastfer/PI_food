@@ -8,29 +8,71 @@ import {useState,useEffect} from "react"
 
 
 const Container=styled.div`
-
-
 background : url(${detalleFondo});
 background-size:cover;
 background-repeat: no-repeat;
 background-attachment: fixed;
 
+
+
 `;
 const DetailContainer=styled.div`
+backgroundColor:rgba(255, 255, 255,0.1);
+backdrop-filter: blur(10px);
+box-shadow:0 10px 20px 5px rgba(0,0,0,0.3); 
+border:solid 1px rgba(255,255,255,0.5)
 `;
 const RecipeNombre=styled.div`
+color:green;
+font-size:35px
 `;
 const RecipeResumen=styled.div`
+color:orange;
+font-size:14px;
+border-radius:15px;
+padding:10px;
+border:5px solid orange
 `;
 const RecipeScore=styled.div`
+color:green;
+font-size:20px
 `;
 const RecipeSteps=styled.div`
-`;
-const RecipeImg=styled.img`
-`;
-const RecipeTipe=styled.div`
+
 `;
 
+const Step=styled.div`
+border: 3px solid yellow;
+margin:15px;
+border-radius:15px;
+color:white;
+padding:5px;
+background-color:orange;
+
+
+`;
+const RecipeImg=styled.img`
+height:40vh;
+border:5px solid #E96B06;
+border-Radius:15px;
+`;
+const RecipeTipe=styled.div`
+color:yellow;
+font-size:20px
+`;
+
+const DivSuperior=styled.div`
+display:flex;
+justify-Content:space-around;
+align-items:center;
+ `;
+
+const estilosLink={
+	textDecoration:"none",
+	fontSize:"25px",
+	backgroundColor:"yellow",
+	borderRadius:"5px"
+}
 
 
 
@@ -55,18 +97,23 @@ export default function Detail(){
 
 	return(
 		<Container>
-			<NavLink to="/home/cards">back to home</NavLink>
-			{recipe?<DetailContainer><RecipeImg src={recipe.image} />
-			
-			<RecipeNombre>{recipe.title}</RecipeNombre>
-			<RecipeResumen>{recipe.summary}</RecipeResumen>
-			<RecipeScore>{recipe.healthScore}</RecipeScore>
-			<RecipeTipe>{recipe.diets.map(diet=>{if(!diet.nombre){return <div>{diet}</div>}
+			<NavLink to="/home/cards" style={estilosLink} ><b>back to home</b></NavLink>
+			{recipe?
+			<DetailContainer>
+				<DivSuperior >
+					<RecipeImg src={recipe.image} />			
+					<div style={{width:"50vw"}}>
+						<RecipeNombre><b>{recipe.title}</b></RecipeNombre>
+						<RecipeResumen><div><b>summary :</b></div>{recipe.summary}</RecipeResumen>
+						<RecipeScore><b>healthScore :</b>{recipe.healthScore}</RecipeScore>
+						<RecipeTipe><b>dietas :</b>{recipe.diets.map(diet=>{if(!diet.nombre){return <div>{diet}</div>}
 												else{return <div>{diet.nombre}</div>}
 												})}</RecipeTipe>
-			{recipe.analyzedInstructions?
-			<RecipeSteps>{recipe.analyzedInstructions[0].steps.map(paso=><div>{paso.number+".- "+paso.step}</div>)}</RecipeSteps>:
-			<RecipeSteps>{recipe.steps.split("^").map(paso=><div>{"- "+paso}</div>)}</RecipeSteps>}
+					</div>
+				</DivSuperior>			
+				{recipe.analyzedInstructions?
+				<RecipeSteps><div><b>STEPS :</b></div>{recipe.analyzedInstructions[0].steps.map(paso=><Step>{paso.number+".- "+paso.step}</Step>)}</RecipeSteps>:
+				<RecipeSteps><div><b>STEPS :</b></div>{recipe.steps.split("^").map(paso=><Step>{"- "+paso}</Step>)}</RecipeSteps>}
 
 			</DetailContainer>:
 

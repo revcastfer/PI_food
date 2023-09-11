@@ -18,7 +18,9 @@ const Pagina=styled.div`
  align-items: center;
  justify-content:center;
  border-radius:5px;
-  border:1px solid blue
+ border:2px solid yellow;
+ background-color:orange
+
  `;
 
 
