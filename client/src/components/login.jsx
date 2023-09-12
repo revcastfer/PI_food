@@ -13,6 +13,9 @@ const Container=styled.div`
 height:100vh;
 background: url(${fondo});
 background-size:cover;
+display:flex;
+align-items:center;
+flex-direction:column;
 
 `;
 

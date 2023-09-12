@@ -43,6 +43,10 @@ export default function FilterBar(){
 
 	
 
+
+
+
+
 	const handleChange=(e)=>{
 		const origen=document.getElementById("origen").value;
 		const dieta=document.getElementById("dieta").value;
@@ -61,10 +65,55 @@ export default function FilterBar(){
 				return ele
 			}
 		};
+		const filterHealth=(ele,valor)=>{
+			switch(valor){
+			case "+":				
+				return ele.sort((x, y) => x.healthScore-y.healthScore).reverse();
+			case "-":
+				return ele.sort((x, y) => x.healthScore-y.healthScore);
+			default:
+				return ele
+			}
+		};
+		const filterSource=(ele,valor)=>{
+			switch(valor){
+			case "API":				
+				return ele.filter(ele=>ele.cuisines);
+			case "FORM":
+				return ele.filter(ele=>!ele.cuisines);
+			default:
+				return ele
+			}
+		};
 		
 
+		const filterDiets=(datos,valor)=>{
+			let rpta="";
+			if(valor==="ALL"){rpta=datos}
+			else{ rpta=datos.filter(ele=>ele.diets.includes(valor))};
+			return rpta			
+		};
+
+
 		const filterExe=()=>{
-			dispatch(setDataFilter(filterOrden(recipes,orden)))
+			let dataFiltrada;
+			let dataFilterScource=filterSource(recipes,origen);
+			let dataFilterDiet=filterDiets(dataFilterScource,dieta);
+
+
+			switch(e.target.id){
+			case "healthScore":
+				dataFiltrada= filterHealth(dataFilterDiet,healthScore);
+				break;
+			case "orden":
+				dataFiltrada= filterOrden(dataFiltrada,orden)
+
+			}
+			
+			//
+			//filterHealth( ,healthScore );
+
+			//dispatch(setDataFilter(dataFilterDiet))
 			
 						
 		};	
@@ -75,16 +124,17 @@ export default function FilterBar(){
 	return(
 		<Container>
 			<Filtros>
-				<OptionSelect  onChange={handleChange} id="dieta" >
-					<option value="ALL">ALL</option>
-					{diets?diets.map(diet=><option key={diet.nombre} value={diet.nombre}>{diet.nombre}</option>):null}
-				</OptionSelect>
 			<b>source:</b>
 				<OptionSelect  onChange={handleChange} id="origen" >
 					<option value="ALL">ALL</option>
 					<option value="API">API</option>
 					<option value="FORM">FORM</option>
 				</OptionSelect>
+			<b>dietas</b>
+				<OptionSelect  onChange={handleChange} id="dieta" >
+					<option value="ALL">ALL</option>
+					{diets?diets.map(diet=><option key={diet.nombre} value={diet.nombre}>{diet.nombre}</option>):null}
+				</OptionSelect>			
 			<b>healthScore:</b>
 				<OptionSelect  onChange={handleChange} id="healthScore">
 					<option value="ALL">ALL</option>

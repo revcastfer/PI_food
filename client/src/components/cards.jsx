@@ -33,8 +33,7 @@ export default function Cards(){
 				{ data.map( recipe=><Card key={recipe.id} recipe={recipe}/> ) }
 					</Container>
 			:<Container>cargando..</Container>}
-
-			<Pagination />
+<Pagination />
 			</div>:<NotFound/>}
 
 			
