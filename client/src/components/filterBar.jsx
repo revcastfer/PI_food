@@ -99,7 +99,7 @@ export default function FilterBar(){
 			let dataFiltrada;
 			let dataFilterScource=filterSource(recipes,origen);
 			let dataFilterDiet=filterDiets(dataFilterScource,dieta);
-
+			dataFiltrada=dataFilterDiet;
 
 			switch(e.target.id){
 			case "healthScore":
@@ -107,15 +107,10 @@ export default function FilterBar(){
 				break;
 			case "orden":
 				dataFiltrada= filterOrden(dataFiltrada,orden)
+				break;
+			}		
 
-			}
-			
-			//
-			//filterHealth( ,healthScore );
-
-			//dispatch(setDataFilter(dataFilterDiet))
-			
-						
+			dispatch(setDataFilter(dataFiltrada))							
 		};	
 
 		filterExe();	

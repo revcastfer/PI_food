@@ -12,6 +12,11 @@ background : url(${detalleFondo});
 background-size:cover;
 background-repeat: no-repeat;
 background-attachment: fixed;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center
 
 
 
@@ -20,12 +25,15 @@ const DetailContainer=styled.div`
 backgroundColor:rgba(255, 255, 255,0.1);
 backdrop-filter: blur(10px);
 box-shadow:0 10px 20px 5px rgba(0,0,0,0.3); 
-border:solid 1px rgba(255,255,255,0.5)
+border:solid 1px rgba(255,255,255,0.5);
+
 `;
 const RecipeNombre=styled.div`
 color:green;
 font-size:35px
 `;
+
+
 const RecipeResumen=styled.div`
 color:orange;
 font-size:14px;
@@ -33,6 +41,7 @@ border-radius:15px;
 padding:10px;
 border:5px solid orange
 `;
+
 const RecipeScore=styled.div`
 color:green;
 font-size:20px
@@ -58,20 +67,33 @@ border-Radius:15px;
 `;
 const RecipeTipe=styled.div`
 color:yellow;
-font-size:20px
+font-size:20px;
+border:5px solid yellow;
+border-radius:15px
 `;
 
 const DivSuperior=styled.div`
 display:flex;
 justify-Content:space-around;
 align-items:center;
+width:90vw;
+ `;
+
+ const DivCargando=styled.div`
+font-size:55px;
+color:yellow;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
  `;
 
 const estilosLink={
 	textDecoration:"none",
 	fontSize:"25px",
 	backgroundColor:"yellow",
-	borderRadius:"5px"
+	borderRadius:"5px",
+	padding:"8px"
 }
 
 
@@ -117,7 +139,7 @@ export default function Detail(){
 
 			</DetailContainer>:
 
-			<div>cargando...</div>}		
+			<DivCargando>cargando...</DivCargando>}		
 			
 
 
