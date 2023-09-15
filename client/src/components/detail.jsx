@@ -12,7 +12,7 @@ background : url(${detalleFondo});
 background-size:cover;
 background-repeat: no-repeat;
 background-attachment: fixed;
-min-height:100vh;
+height:100%;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -61,7 +61,7 @@ background-color:orange;
 
 `;
 const RecipeImg=styled.img`
-height:40vh;
+max-height:40vh;
 border:5px solid #E96B06;
 border-Radius:15px;
 `;
@@ -102,8 +102,7 @@ const estilosLink={
 export default function Detail(){
 	const id=useParams().id;
 	const [recipe,setRecipe]=useState();
-	const [stepsProcess,setStepsProcess]=useState();
-		useEffect(()=>{
+			useEffect(()=>{
 			if(!recipe){
 				axios(`/recipe/${id}`)
 			.then(data=>data.data)
@@ -128,14 +127,14 @@ export default function Detail(){
 						<RecipeNombre><b>{recipe.title}</b></RecipeNombre>
 						<RecipeResumen><div><b>summary :</b></div>{recipe.summary}</RecipeResumen>
 						<RecipeScore><b>healthScore :</b>{recipe.healthScore}</RecipeScore>
-						<RecipeTipe><b>dietas :</b>{recipe.diets.map(diet=>{if(!diet.nombre){return <div>{diet}</div>}
+						<RecipeTipe><b>diets :</b>{recipe.diets.map(diet=>{if(!diet.nombre){return <div>{diet}</div>}
 												else{return <div>{diet.nombre}</div>}
 												})}</RecipeTipe>
 					</div>
 				</DivSuperior>			
 				{recipe.analyzedInstructions?
-				<RecipeSteps><div><b>STEPS :</b></div>{recipe.analyzedInstructions[0].steps.map(paso=><Step>{paso.number+".- "+paso.step}</Step>)}</RecipeSteps>:
-				<RecipeSteps><div><b>STEPS :</b></div>{recipe.steps.split("^").map(paso=><Step>{"- "+paso}</Step>)}</RecipeSteps>}
+				<RecipeSteps ><div><b>STEPS :</b></div>{recipe.analyzedInstructions[0].steps.map(paso=><Step key={paso.number+"l"}>{paso.number+".- "+paso.step}</Step>)}</RecipeSteps>:
+				<RecipeSteps><div><b>STEPS :</b></div>{recipe.steps.split("^").map(paso=><Step >{"- "+paso}</Step>)}</RecipeSteps>}
 
 			</DetailContainer>:
 

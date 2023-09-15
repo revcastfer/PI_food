@@ -17,6 +17,7 @@ background-size:cover;
 background-repeat: no-repeat;
 background-attachment: fixed;
 
+
 `;
 
 export default function Home(){
@@ -35,6 +36,8 @@ export default function Home(){
 
 
 	},[dispatch,navigate])
+
+	
 
 	
 	return(

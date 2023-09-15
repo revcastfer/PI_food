@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import axios from "axios"
 import { useSelector } from 'react-redux'
 import { useDispatch} from 'react-redux'
 import {setDataFilter} from '../redux/actions.js'

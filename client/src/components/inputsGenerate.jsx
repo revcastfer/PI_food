@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import {useState,useEffect} from "react"
 import {setNroPasos,pasos} from "../redux/actions.js"
 import { useDispatch} from 'react-redux'
 
@@ -7,16 +6,20 @@ const Container=styled.div`
 display:flex;
 flex-direction: row;
 flex-wrap:wrap;
+font-size:25px;
+color:yellow
 
  `;
 
-const Flag=styled.div`
-	font-size:35px
+ const StepStyle=styled.textarea`
+ 	border-radius:8px;
+ 	width:35vw
+
   `;
 
+
 export default function InputsGenerate(){
-	const [numberOfSteps,setNumberOfSteps]=useState(0);	
-	const dispatch=useDispatch();
+		const dispatch=useDispatch();
 	const nroPasos=10;
 
 	const flag=[];
@@ -29,14 +32,22 @@ export default function InputsGenerate(){
 		let cont=0;
 		flag.forEach(step=>{let valor=document.getElementById(step).value.trim();
 								if(valor.length>0){
+									if(document.getElementById(step+1)){
+									document.getElementById(step+1).style.visibility="visible"};					
+
 									cont=cont+1  ;								
 									tempSteps.push(valor)
-								}
+								}else{if(document.getElementById(step+1)){
+									document.getElementById(step+1).style.visibility="hidden"
+								} }
 		})
 	;
 
 		dispatch(setNroPasos(cont));
-		if(tempSteps.length>0){let pasosStr=tempSteps.join("^");dispatch(pasos(pasosStr))}
+		if(tempSteps.length>0){
+			let pasosStr=tempSteps.join("^");
+			dispatch(pasos(pasosStr))
+		}
 		else{dispatch(pasos(""))}
 		
 	}
@@ -48,10 +59,13 @@ export default function InputsGenerate(){
 	return(
 
 <Container id="container" >
-	
+			<div><b>preparation :</b></div>
+			<div key={`gen1`}>
+				<StepStyle id="1" className="steps"  onChange={handleWrite}  rows="3" type="text" placeholder={`ingrese paso 1`}/>			
+			</div>
 		{flag.map(number=>
-			<div key={`gen${number}`}>
-				<textarea id={number}  onChange={handleWrite} cols="60" rows="3" type="text" placeholder={`ingrese paso ${number}`}/>			
+			<div key={`gen${number}`} style={{visibility:"hidden"}}>
+				<StepStyle id={number+1} className="steps"  onChange={handleWrite}  rows="3" type="text" placeholder={`ingrese paso ${number+1}`}/>			
 			</div>)}
 
 

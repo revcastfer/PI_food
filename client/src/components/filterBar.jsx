@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import axios from "axios"
 import {useState,useEffect} from "react"
-import {setDataFilter} from "../redux/actions.js"
+import {setDataFilter,setPageNumber} from "../redux/actions.js"
 import {useSelector,useDispatch} from 'react-redux'
 import SearchBar from "./searchBar.jsx"
 
@@ -39,7 +39,8 @@ export default function FilterBar(){
 				.then(data=>data.data)
 				.then(data=>{setDiets(data)});
 							};
-	},[recipesfilter]);	
+	},[diets]);
+	
 
 	
 
@@ -97,18 +98,21 @@ export default function FilterBar(){
 
 		const filterExe=()=>{
 			let dataFiltrada;
+			dispatch(setPageNumber(1));
 			let dataFilterScource=filterSource(recipes,origen);
 			let dataFilterDiet=filterDiets(dataFilterScource,dieta);
 			dataFiltrada=dataFilterDiet;
 
 			switch(e.target.id){
 			case "healthScore":
-				dataFiltrada= filterHealth(dataFilterDiet,healthScore);
+				dataFiltrada= filterHealth(dataFiltrada,healthScore);
 				break;
 			case "orden":
 				dataFiltrada= filterOrden(dataFiltrada,orden)
 				break;
-			}		
+			default:
+				console.log("default")
+			};		
 
 			dispatch(setDataFilter(dataFiltrada))							
 		};	

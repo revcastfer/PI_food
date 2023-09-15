@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 
 const Container=styled.div`
 display:flex;
-height:100vh;
+height:50rem;
 justify-content: center;
 color:orange
 
@@ -17,7 +17,7 @@ color:orange
 
 const ErrorData=styled.div`
 display:inline;
-color:yellow;
+color:red;
 font-size:20px;
 visibility:hidden
 `;
@@ -27,19 +27,15 @@ width:40vw;
 justify-content: space-between;
 margin:15px
  `;
-const RecipeNombre=styled.input`
+const RecipeDetail=styled.input`
+height:20px;
+border-radius:5px
 `;
 const RecipeResumen=styled.textarea`
 `;
-const RecipeScore=styled.input`
 
-`;
 const RecipeSteps=styled.div`
-
 display:flex;
-
-`;
-const RecipeImg=styled.input`
 `;
 
 const SendButtom=styled.button`
@@ -101,7 +97,7 @@ export default function NewRecipe(){
 			}else{changeErrorVisibility("error"+e.target.id,"hidden");setDataReady({...dataReady,nombre:1})}
 			break;
 		case "healthScore":			
-			if(Number(target.value)<0 || Number(target.value)>100){
+			if(Number(target.value)<1 || Number(target.value)>100){
 				changeErrorVisibility("error"+e.target.id,"visible");setDataReady({...dataReady,score:0})
 			}else{
 				changeErrorVisibility("error"+e.target.id,"hidden");setDataReady({...dataReady,score:1})}
@@ -140,16 +136,16 @@ export default function NewRecipe(){
 		<Container>
 		 <form onSubmit={send}>
 			<Option>
-				<RecipeNombre onChange={validacion} id="nombre" type="text" placeholder="nombre"/>
+				<RecipeDetail onChange={validacion} id="nombre" type="text" placeholder="Recipe name "/>
 				<ErrorData id="errornombre" className="error"><b>no vacio,no numeros</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeImg onChange={validacion}  id="imagen" type="url" placeholder="imagen url"/>
+				<RecipeDetail onChange={validacion}  id="imagen" type="url" placeholder="Recipe url image "/>
 				<ErrorData id="errorimagen" className="error"><b>no vacio,formato url</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeScore onChange={validacion}  id="healthScore" type="number" placeholder="healt Score"/>
-				<ErrorData id="errorhealthScore" className="error"><b>elegir puntuacion entre 0 y 100</b></ErrorData>
+				<RecipeDetail onChange={validacion}  id="healthScore" type="number" placeholder="Recipe health Score"/>
+				<ErrorData id="errorhealthScore" className="error"><b>elegir puntuacion entre 1 y 100</b></ErrorData>
 			</Option>
 			<Option>
 				<RecipeResumen onChange={validacion} id="resumen" rows="5" cols="43" placeholder="resumen"/>
