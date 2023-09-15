@@ -61,11 +61,11 @@ export default function InputsGenerate(){
 <Container id="container" >
 			<div><b>preparation :</b></div>
 			<div key={`gen1`}>
-				<StepStyle id="1" className="steps"  onChange={handleWrite}  rows="3" type="text" placeholder={`ingrese paso 1`}/>			
+				<StepStyle id="1" className="steps"  onChange={handleWrite}  rows="3" type="text" placeholder={`enter step 1`}/>			
 			</div>
 		{flag.map(number=>
 			<div key={`gen${number}`} style={{visibility:"hidden"}}>
-				<StepStyle id={number+1} className="steps"  onChange={handleWrite}  rows="3" type="text" placeholder={`ingrese paso ${number+1}`}/>			
+				<StepStyle id={number+1} className="steps"  onChange={handleWrite}  rows="3" type="text" placeholder={`enter step ${number+1}`}/>			
 			</div>)}
 
 

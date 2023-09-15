@@ -11,7 +11,8 @@ const Container=styled.div`
 display:flex;
 height:50rem;
 justify-content: center;
-color:orange
+color:orange;
+font-size:28px
 
 `;
 
@@ -133,22 +134,23 @@ export default function NewRecipe(){
 	};
 
 	return( 
-		<Container>
+		<Container>		 
 		 <form onSubmit={send}>
+		 	<div><b>Create a new recipe</b></div>	
 			<Option>
-				<RecipeDetail onChange={validacion} id="nombre" type="text" placeholder="Recipe name "/>
+				<RecipeDetail onChange={validacion} id="nombre" type="text" placeholder="New recipe name "/>
 				<ErrorData id="errornombre" className="error"><b>no vacio,no numeros</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeDetail onChange={validacion}  id="imagen" type="url" placeholder="Recipe url image "/>
+				<RecipeDetail onChange={validacion}  id="imagen" type="url" placeholder="New recipe image url "/>
 				<ErrorData id="errorimagen" className="error"><b>no vacio,formato url</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeDetail onChange={validacion}  id="healthScore" type="number" placeholder="Recipe health Score"/>
+				<RecipeDetail onChange={validacion}  id="healthScore" type="number" placeholder="New recipe health Score"/>
 				<ErrorData id="errorhealthScore" className="error"><b>elegir puntuacion entre 1 y 100</b></ErrorData>
 			</Option>
 			<Option>
-				<RecipeResumen onChange={validacion} id="resumen" rows="5" cols="43" placeholder="resumen"/>
+				<RecipeResumen onChange={validacion} id="resumen" rows="5" cols="43" placeholder="New recipe summary"/>
 				<ErrorData id="errorresumen" className="error"><b>no vacio</b></ErrorData>
 			</Option>
 			{diets?<Option>

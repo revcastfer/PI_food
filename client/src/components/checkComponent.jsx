@@ -4,6 +4,7 @@ import {setDietsSelected} from "../redux/actions.js"
 
 
 const Container=styled.div`
+font-size:17px
 `;
 const Option=styled.div`
 display:flex;
@@ -29,7 +30,7 @@ export default function CheckComponent(props){
 	return(
 		<Container>
 			<fieldset onChange={scaningOptions}>
-  				<legend>Choose Diets</legend>
+  				<legend>Choose Diet(s)</legend>
   				{options?options.map(option=> 
   				<Option key={`chk${option.nombre}`}>
   					<input type="checkbox" id={option.nombre}  value={option.nombre} className="checks" />
